@@ -29,7 +29,7 @@ const AddForm = (props) => {
             setError(errorMessage);
         }
         else {
-            state.id = nanoid();
+            state.id = 'random';
             addSmurf(state);
             setState({ name: '', position: '', nickname: '', description: '' });
         }

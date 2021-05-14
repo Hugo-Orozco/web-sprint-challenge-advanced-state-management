@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import AddForm from './components/AddForm';
+import SmurfProfile from './components/SmurfProfile';
 import SmurfList from './components/SmurfList';
 import Header from './components/Header';
 
@@ -20,10 +22,20 @@ class App extends Component {
       <div className="App">
         <Header />
 
-        <main>
-          <SmurfList />
-          <AddForm />
-        </main>
+        <Switch>
+          <Route exact path='/smurfs/:id' render={({match}) => this.props.smurfs.length > 0 && <SmurfProfile smurf={this.props.smurfs.find(item => item.id === match.params.id)} />} />
+
+          <Route exact path='/smurfs'>
+            <SmurfList />
+          </Route>
+
+          <Route path='/'>
+            <main>
+              <SmurfList />
+              <AddForm />
+            </main>
+          </Route>
+        </Switch>
       </div>
     );
   }
